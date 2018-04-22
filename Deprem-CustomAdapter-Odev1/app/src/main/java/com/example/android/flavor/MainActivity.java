@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Create an ArrayList of AndroidFlavor objects
+        // ArrayList içerisine AndroidFlavor Modeline uygun nesne yaratılıyor ve ekleniyor.
         ArrayList<AndroidFlavor> androidFlavors = new ArrayList<AndroidFlavor>();
         androidFlavors.add(new AndroidFlavor("Donut", "1.6", R.drawable.donut));
         androidFlavors.add(new AndroidFlavor("Eclair", "2.0-2.1", R.drawable.eclair));
@@ -46,12 +46,10 @@ public class MainActivity extends AppCompatActivity {
         androidFlavors.add(new AndroidFlavor("Lollipop", "5.0-5.1.1", R.drawable.lollipop));
         androidFlavors.add(new AndroidFlavor("Marshmallow", "6.0-6.0.1", R.drawable.marshmallow));
 
-        // Create an {@link AndroidFlavorAdapter}, whose data source is a list of
-        // {@link AndroidFlavor}s. The adapter knows how to create list item views for each item
-        // in the list.
+       // Her ArrayList öğesi için oluşturulacak görünümü kazandıracak Adaptör oluşturuyoruz.
         AndroidFlavorAdapter flavorAdapter = new AndroidFlavorAdapter(this, androidFlavors);
 
-        // Get a reference to the ListView, and attach the adapter to the listView.
+        //ListView referansı çalıştırılıyor.
         ListView listView = (ListView) findViewById(R.id.listview_flavor);
         listView.setAdapter(flavorAdapter);
     }

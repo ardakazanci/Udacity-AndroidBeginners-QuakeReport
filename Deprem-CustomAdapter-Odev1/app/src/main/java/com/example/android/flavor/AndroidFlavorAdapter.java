@@ -26,70 +26,62 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /*
-* {@link AndroidFlavorAdapter} is an {@link ArrayAdapter} that can provide the layout for each list
-* based on a data source, which is a list of {@link AndroidFlavor} objects.
+* Adapter : Her bir liste öğesi(AndroidFlavor nesnesi) için düzen sağlar.
+* Bu düzen içerisinde AndroidFlavor nesnelerini içerir.
+* Veri Kaynağı : AndroidFlavor
+* Düzen Sağlayan : ArrayAdapter
 * */
 public class AndroidFlavorAdapter extends ArrayAdapter<AndroidFlavor> {
 
     private static final String LOG_TAG = AndroidFlavorAdapter.class.getSimpleName();
 
     /**
-     * This is our own custom constructor (it doesn't mirror a superclass constructor).
-     * The context is used to inflate the layout file, and the list is the data we want
-     * to populate into the lists.
+     * Özel Adaptör için bir özel yapıcı metot yer almaktadır. Burada liste yi dolduracak veriler eşitlenir.
      *
-     * @param context        The current context. Used to inflate the layout file.
-     * @param androidFlavors A List of AndroidFlavor objects to display in a list
+     * @param context        Mevcut içerik düzen dosyasını şişirmek için kullanılır.
+     * @param androidFlavors Listede görüntülenecek bir AndroidFlavor nesnesi , öğesi.
      */
     public AndroidFlavorAdapter(Activity context, ArrayList<AndroidFlavor> androidFlavors) {
-        // Here, we initialize the ArrayAdapter's internal storage for the context and the list.
-        // the second argument is used when the ArrayAdapter is populating a single TextView.
-        // Because this is a custom adapter for two TextViews and an ImageView, the adapter is not
-        // going to use this second argument, so it can be any value. Here, we used 0.
+        // Burada, ArrayAdapter'ün içerik ve liste için dahili depolamasını başlatıyoruz.
+        // Özel bir tasarım için adaptör kullandığımızdan ikinci değer 0 kullandık herhangi bir sayıda olabilir.
         super(context, 0, androidFlavors);
     }
 
     /**
      * Provides a view for an AdapterView (ListView, GridView, etc.)
      *
-     * @param position The position in the list of data that should be displayed in the
-     *                 list item view.
-     * @param convertView The recycled view to populate.
-     * @param parent The parent ViewGroup that is used for inflation.
-     * @return The View for the position in the AdapterView.
+     * @param position Listview'de , görüntülenmesi gereken veri listesindeki konum.
+     * @param convertView Geridönüşüm için kullanılacak görünüm. Şişirilecek yani. Textview ImageView gibi. Elemanlar üstüne eklenecek Tekrar kullanılacak
+     * @param parent Şişirilen elemanların (XML Kodunda yer view elemanlarının ) tümü.
+     * @return İlgili position a ait görünüm döndürülecek. 1.Eleman ve görünümü 2.Eleman ve görünümü gibi.
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // Check if the existing view is being reused, otherwise inflate the view
+        // Mevcut görünüm yeniden kullanılması kontrol ediliyor. Yoksa şişiriliyor.
         View listItemView = convertView;
         if(listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(
                     R.layout.list_item, parent, false);
         }
 
-        // Get the {@link AndroidFlavor} object located at this position in the list
+        // Listede AndroidFlavor içerisinde yer alan ilgili nesnesi alıyoruz.
         AndroidFlavor currentAndroidFlavor = getItem(position);
 
-        // Find the TextView in the list_item.xml layout with the ID version_name
         TextView nameTextView = (TextView) listItemView.findViewById(R.id.version_name);
-        // Get the version name from the current AndroidFlavor object and
-        // set this text on the name TextView
+        // İlgili nesnenin get metodu ile birlikte değeri alıp textview ' e aktarıyoruz diğerleride aynı şekilde
         nameTextView.setText(currentAndroidFlavor.getVersionName());
 
-        // Find the TextView in the list_item.xml layout with the ID version_number
+
         TextView numberTextView = (TextView) listItemView.findViewById(R.id.version_number);
-        // Get the version number from the current AndroidFlavor object and
-        // set this text on the number TextView
+
         numberTextView.setText(currentAndroidFlavor.getVersionNumber());
 
-        // Find the ImageView in the list_item.xml layout with the ID list_item_icon
+
         ImageView iconView = (ImageView) listItemView.findViewById(R.id.list_item_icon);
-        // Get the image resource ID from the current AndroidFlavor object and
-        // set the image to iconView
+
         iconView.setImageResource(currentAndroidFlavor.getImageResourceId());
 
-        // Return the whole list item layout (containing 2 TextViews and an ImageView)
-        // so that it can be shown in the ListView
+
         return listItemView;
     }
 
