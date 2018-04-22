@@ -32,25 +32,22 @@ public class EarthquakeActivity extends AppCompatActivity {
         setContentView(R.layout.earthquake_activity);
 
         // Sahte Liste
-        ArrayList<String> earthquakes = new ArrayList<>();
-        earthquakes.add("San Francisco");
-        earthquakes.add("London");
-        earthquakes.add("Tokyo");
-        earthquakes.add("Mexico City");
-        earthquakes.add("Moscow");
-        earthquakes.add("Rio de Janeiro");
-        earthquakes.add("Paris");
+        ArrayList<Model> depremListesi = new ArrayList<Model>();
+        depremListesi.add(new Model("7.2", "Ankara", "Çarşamba 2016"));
+        depremListesi.add(new Model("7.2", "Ankara", "Çarşamba 2016"));
+        depremListesi.add(new Model("7.2", "Ankara", "Çarşamba 2016"));
+        depremListesi.add(new Model("7.2", "Ankara", "Çarşamba 2016"));
+        depremListesi.add(new Model("7.2", "Ankara", "Çarşamba 2016"));
+        depremListesi.add(new Model("7.2", "Ankara", "Çarşamba 2016"));
+
 
         // Listview ' i bağlama
-        ListView earthquakeListView = (ListView) findViewById(R.id.list);
+        ListView depremListView = (ListView) findViewById(R.id.list);
 
-        // ArrayList ' e uygun arrayadapter oluşturuldu . Sahte veriler listview ' e bağlanıyor.
-        // Adapter verilerin listview ' e de nasıl görüneceğini ayarlar. Veriler ile görünümü birbirine bağlar.
-        
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_list_item_1, earthquakes);
+        Adapter ozelAdapter = new Adapter(this, depremListesi);
+
 
         // Adapter ' e listview ' i bağlıyor.
-        earthquakeListView.setAdapter(adapter);
+        depremListView.setAdapter(ozelAdapter);
     }
 }
