@@ -2,21 +2,23 @@ package com.example.android.quakereport;
 
 public class Model {
 
-    private String depremSiddeti;
+    private double depremSiddeti;
     private String depremKonum;
-    private String depremTarih;
+    private long depremTarih; // Deprem zamanı UNİX temelde olduğu için long değişken türünü kullandık.
+    private String depremUrl;
 
-    public Model(String depremSiddeti, String depremKonum, String depremTarih) {
+    public Model(double depremSiddeti, String depremKonum, long depremTarih, String depremUrl) {
         this.depremSiddeti = depremSiddeti;
         this.depremKonum = depremKonum;
         this.depremTarih = depremTarih;
+        this.depremUrl = depremUrl;
     }
 
-    public String getDepremSiddeti() {
+    public double getDepremSiddeti() {
         return depremSiddeti;
     }
 
-    public void setDepremSiddeti(String depremSiddeti) {
+    public void setDepremSiddeti(double depremSiddeti) {
         this.depremSiddeti = depremSiddeti;
     }
 
@@ -28,11 +30,19 @@ public class Model {
         this.depremKonum = depremKonum;
     }
 
-    public String getDepremTarih() {
+    public long getDepremTarih() {
         return depremTarih;
     }
 
-    public void setDepremTarih(String depremTarih) {
+    public void setDepremTarih(long depremTarih) {
         this.depremTarih = depremTarih;
+    }
+
+    public String getDepremUrl() {
+        return depremUrl;
+    }
+
+    public void setDepremUrl(String depremUrl) {
+        this.depremUrl = depremUrl;
     }
 }

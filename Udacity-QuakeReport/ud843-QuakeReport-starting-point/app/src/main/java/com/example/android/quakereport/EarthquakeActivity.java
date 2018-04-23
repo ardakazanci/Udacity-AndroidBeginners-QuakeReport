@@ -15,15 +15,27 @@
  */
 package com.example.android.quakereport;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
 public class EarthquakeActivity extends AppCompatActivity {
+    // Yol Haritası
 
+    /**
+     * ArrayList içerisine JSONParse işlemi sonucunda dönen değerleri ekledim
+     * Eklenen her bir değer için view elemanı oluşturdum - şişirme işlemi yaptım.
+     * Daha sonra adapter ile listview i birbirine bağladım.
+     * Kullandığım adaptör ise ArrayAdaptör oldu.
+     * Adaptör - Veriler ile görünümler arasında bağlantı sağlıyor.
+     */
     public static final String LOG_TAG = EarthquakeActivity.class.getName();
 
     @Override
@@ -32,22 +44,34 @@ public class EarthquakeActivity extends AppCompatActivity {
         setContentView(R.layout.earthquake_activity);
 
         // Sahte Liste
-        ArrayList<Model> depremListesi = new ArrayList<Model>();
-        depremListesi.add(new Model("7.2", "Ankara", "Çarşamba 2016"));
-        depremListesi.add(new Model("7.2", "Ankara", "Çarşamba 2016"));
-        depremListesi.add(new Model("7.2", "Ankara", "Çarşamba 2016"));
-        depremListesi.add(new Model("7.2", "Ankara", "Çarşamba 2016"));
-        depremListesi.add(new Model("7.2", "Ankara", "Çarşamba 2016"));
-        depremListesi.add(new Model("7.2", "Ankara", "Çarşamba 2016"));
+        ArrayList<Model> depremListesi = Araclar.parseEdilenVeriler(); // Buradan zaten json veri dönecek ve yeni nesne oluşturulmuş olacak.
 
 
         // Listview ' i bağlama
         ListView depremListView = (ListView) findViewById(R.id.list);
-
-        Adapter ozelAdapter = new Adapter(this, depremListesi);
+        // final koymamızın sebebi tıklama olayını ele almak için.
+        final Adapter ozelAdapter = new Adapter(this, depremListesi);
 
 
         // Adapter ' e listview ' i bağlıyor.
         depremListView.setAdapter(ozelAdapter);
+
+        depremListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                Model ilgiliNesne = ozelAdapter.getItem(i);
+
+                Uri ilgiliUri = Uri.parse(ilgiliNesne.getDepremUrl()); // Uri aracılığıyla URL ' e çevirdik.
+
+                Intent intent = new Intent(Intent.ACTION_VIEW, ilgiliUri);
+
+                startActivity(intent);
+
+
+            }
+        });
+
+
     }
 }
