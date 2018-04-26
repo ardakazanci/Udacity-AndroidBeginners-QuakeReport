@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * An {@link EarthquakeAdapter} knows how to create a list item layout for each earthquake
  * in the data source (a list of {@link Earthquake} objects).
- *
+ * <p>
  * These list item layouts will be provided to an adapter view like ListView
  * to be displayed to the user.
  */
@@ -47,7 +47,7 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
     /**
      * Constructs a new {@link EarthquakeAdapter}.
      *
-     * @param context of the app
+     * @param context     of the app
      * @param earthquakes is the list of earthquakes, which is the data source of the adapter
      */
     public EarthquakeAdapter(Context context, List<Earthquake> earthquakes) {
@@ -215,4 +215,12 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
         return timeFormat.format(dateObject);
     }
+
+    public void sifirla(List<Earthquake> data) {
+
+        notifyDataSetChanged();
+
+    }
+
+
 }
