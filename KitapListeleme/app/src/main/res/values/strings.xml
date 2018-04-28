@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">KitapListeleme</string>
+    <string name="edittext_hint">Kitap Adı</string>
+    <string name="button_text">Ara</string>
+    <string name="custom_textview_text">Kitap Adı</string>
+    <string name="custom_textview_aciklama">Kitap Açıklaması</string>
+</resources>
